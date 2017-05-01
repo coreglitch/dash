@@ -15,7 +15,7 @@ else
   CXX_COMPILER="g++"
 fi
 
-DASH_ENV_EXPORTS="export DASH_MAKE_PROCS='${MAKE_PROCS}'; export DASH_MAX_UNITS='3'; export DASH_BUILDEX='OFF';"
+DASH_ENV_EXPORTS="export DASH_MAKE_PROCS='${MAKE_PROCS}'; export DASH_MAX_UNITS='3'; export DASH_BUILDEX='OFF'; export GTEST_FILTER='CoArray*';"
 
 DASH_ENV_EXPORTS="${DASH_ENV_EXPORTS} export CC='${C_COMPILER}'; export CXX='${CXX_COMPILER}';"
 
@@ -25,7 +25,7 @@ for MPIENV in ${MPIENVS[@]}; do
   if [[ $(( $i % ${CIRCLE_NODE_TOTAL} )) -eq ${CIRCLE_NODE_INDEX} ]]; then
 
     echo "Starting docker container: $MPIENV"
-    # prevent ci timeout by printing message every 1 minute
+    # prevent ci timeout by printing message every 2 minutes
     while sleep 120; do echo "[ CI ] Timeout prevention $(date)"; done &
 
     docker run -v $PWD:/opt/dash dashproject/ci:$MPIENV \
