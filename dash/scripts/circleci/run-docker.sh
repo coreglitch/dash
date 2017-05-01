@@ -15,8 +15,10 @@ else
   CXX_COMPILER="g++"
 fi
 
-DASH_ENV_EXPORTS="export DASH_MAKE_PROCS='${MAKE_PROCS}'; export DASH_MAX_UNITS='3'; export DASH_BUILDEX='OFF'; export GTEST_FILTER='CoArray*';"
+DASH_ENV_EXPORTS="export DASH_MAKE_PROCS='${MAKE_PROCS}'; export DASH_MAX_UNITS='3'; export DASH_BUILDEX='OFF';"
 
+#temporary disable certain tests in Circle
+DASH_ENV_EXPORTS="${DASH_ENV_EXPORTS} export GTEST_FILTER='-MinElementTest.TestFindMatrixDefault';"
 DASH_ENV_EXPORTS="${DASH_ENV_EXPORTS} export CC='${C_COMPILER}'; export CXX='${CXX_COMPILER}';"
 
 # run tests
